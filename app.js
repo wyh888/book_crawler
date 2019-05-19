@@ -17,7 +17,7 @@ app.configure(function () {
 app.get('/', function(req, res, next){
   // 第一个参数是返回结果的开始位置
   // 第二个参数是返回结果的数量
-  read.articleListByClassId( 9, 40, function (err, list) {
+  read.articleListByClassId( 0, 40, function (err, list) {
     if (err) return next(err);
 
     // 渲染模板

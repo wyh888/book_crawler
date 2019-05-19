@@ -34,11 +34,11 @@ exports.articleList = function(url, callback){
 			var $me = $(this);
 			var item = {
 				title: $me.text().trim(),
-				url: 'http://www.biquge.com' + $me.attr('href')
+				url: 'http://www.xbiquge.la' + $me.attr('href')
 			};
 
 			// 从URL中取出文章ID
-			var s = item.url.match(/[0-9]_[0-9]+\/([0-9]+)\.html/);
+			var s = item.url.match(/[0-9]\/[0-9]+\/([0-9]+)\.html/);
 			if(Array.isArray(s)) {
 				item.id = s[1];
 				articleList.push(item);

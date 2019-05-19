@@ -10,7 +10,6 @@ var debug = require('debug')('blog:web:read');
  */
 exports.classList = function (callback) {
   debug('获取文章分类列表');
-
 };
 
 
@@ -42,8 +41,6 @@ exports.article = function (id, callback) {
  * @param {Function} callback
  */
 exports.articleListByClassId = function (offset, limit, callback) {
-	console.log(offset);
-	console.log(limit);
   debug('获取指定分类下的文章列表：%s, %s', offset, limit);
 
   var sql = 'SELECT * FROM `article_list` AS `A`' +
