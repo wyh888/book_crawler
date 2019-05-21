@@ -5,6 +5,8 @@ const save = require('../controller/save')
 const debug = require('debug')('crawler:run')
 
 module.exports = function() {
+  debug('定时任务开启')
+  
   let articleList = {}
 
   async.series([
@@ -28,7 +30,7 @@ module.exports = function() {
 
     // 重新整理文章列表，把重复的文章去掉
     function (done) {
-      console.log('整理文章列表，把重复的文章去掉');
+      debug('整理文章列表，把重复的文章去掉')
       var articles = {}
       Object.keys(articleList).forEach(function (classId) {
         articleList[classId].forEach(function (item) {
@@ -46,11 +48,10 @@ module.exports = function() {
 
     // 依次读取文章的详细内容，并保存
     function (done) {
-      console.log('读取文章详细内容')
       async.eachSeries(articleList, function (item, next) {
         save.isArticleExists(item.id).then((exists) => {
           if (exists) {
-            console.log('文章已存在：%s', item.url)
+            debug('文章已存在：%s', item.url)
             return next()
           }
           

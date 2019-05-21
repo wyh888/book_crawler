@@ -9,7 +9,7 @@ const { exec } = require('../db/mysql')
  * @param {Function} callback
  */
 exports.articleList = function (list, callback) {
-  console.log('保存文章列表到数据库：%d', list.length)
+  debug('保存文章列表到数据库：%d', list.length)
 
   // return new Promise((resolve, reject) => {
     
@@ -52,7 +52,7 @@ exports.articleList = function (list, callback) {
  * @param {String} content
  */
 exports.articleDetail = function (id, content) {
-  console.log('保存文章内容: %s', id);
+  debug('保存文章内容: %s', id);
 
   return new Promise((resolve) => {
     const sql = `select id from article_detail where id='${id}';`
