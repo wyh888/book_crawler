@@ -1,21 +1,20 @@
 const nodemailer = require('nodemailer')
+const transporter = nodemailer.createTransport({
+  service: '163',
+  port: 25,
+  secureConnection: true,
+  auth: {
+    user: '',
+    pass: ''
+  }
+})
 
-module.exports = function () {
-  let transporter = nodemailer.createTransport({
-    service: '163',
-    port: 25,
-    secureConnection: true,
-    auth: {
-      user: '18819467659@163.com',
-      pass: 'wang6666'
-    }
-  })
-
+const sendMail = (subject, content) => {
   let mailOptions = {
-    from: '"wangyh" <18819467659@163.com>',
+    from: '',
     to: '18819467659@163.com',
-    subject: '测试邮件',
-    html: '<b>hello world<b>'
+    subject: `道君新更新章节：${subject}`,
+    html: content
   }
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -25,3 +24,5 @@ module.exports = function () {
     console.log('Message sent: %s', info.messageId)
   })
 }
+
+module.exports = sendMail

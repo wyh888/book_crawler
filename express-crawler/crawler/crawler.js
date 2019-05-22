@@ -2,10 +2,11 @@ const async = require('async')
 const config = require('../conf/book')
 const read = require('../controller/read')
 const save = require('../controller/save')
+const sendMail = require('./email')
 const debug = require('debug')('crawler:run')
 
 module.exports = function() {
-  debug('定时任务开启')
+  debug('爬虫任务开启')
   
   let articleList = {}
 
@@ -57,6 +58,7 @@ module.exports = function() {
           
           read.articleDetail(item.url).then((content) => {
             save.articleDetail(item.id, content).then(() => {
+              sendMail(item.title, content)
               next()
             })
           })

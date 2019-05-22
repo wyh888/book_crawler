@@ -2,7 +2,7 @@
 const { exec } = require('../db/mysql')
 
 const getList =  () => {
-  let sql = `select * from article_list;`
+  let sql = `select * from article_list order by rank;`
 
   return exec(sql)
 }
