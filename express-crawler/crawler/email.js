@@ -12,8 +12,8 @@ const transporter = nodemailer.createTransport({
 const sendMail = (subject, content) => {
   let mailOptions = {
     from: '',
-    to: '18819467659@163.com',
-    subject: `道君新更新章节：${subject}`,
+    to: '',
+    subject: `道君最新更新章节：${subject}`,
     html: content
   }
 

@@ -4,11 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var scheduleCrawler = require('./crawler/index');
-var startCrawler = require('./crawler/crawler');
 
-startCrawler();
-
-// scheduleCrawler(); // 定时执行爬虫任务
+scheduleCrawler(); // 定时执行爬虫任务
 
 var indexRouter = require('./routes/index');
 var articleRouter = require('./routes/article');
