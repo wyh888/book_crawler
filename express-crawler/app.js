@@ -9,6 +9,7 @@ scheduleCrawler(); // 定时执行爬虫任务
 
 var indexRouter = require('./routes/index');
 var articleRouter = require('./routes/article');
+var bookRouter = require('./routes/book')
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/article', articleRouter);
+app.use('/api/book', bookRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
