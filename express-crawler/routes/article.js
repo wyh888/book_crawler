@@ -7,7 +7,7 @@ const {
 const { SuccessModel } = require('../model/resModel')
 
 router.get('/list', (req, res, next) => {
-  const result = getList()
+  const result = getList(req.query.id)
   return result.then(data => {
     res.json(
       new SuccessModel(data)

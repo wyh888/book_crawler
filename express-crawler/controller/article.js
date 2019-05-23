@@ -1,8 +1,8 @@
 // const xss = require('xss')
 const { exec } = require('../db/mysql')
 
-const getList =  () => {
-  let sql = `select * from article_list order by id;`
+const getList =  (id) => {
+  let sql = `select * from article_list where book_id='${id}' order by article_rank;`
 
   return exec(sql)
 }
