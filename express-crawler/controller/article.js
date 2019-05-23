@@ -7,8 +7,8 @@ const getList =  (id) => {
   return exec(sql)
 }
 
-const getContent = (articleId) => {
-  const sql = `select * from article_detail where article_id='${articleId}';`
+const getContent = (bookId, articleId) => {
+  const sql = `select * from article_detail where book_id='${bookId}' and article_id='${articleId}';`
   return exec(sql).then(rows => {
     return rows[0]
   })

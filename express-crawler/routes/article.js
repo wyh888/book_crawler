@@ -16,7 +16,8 @@ router.get('/list', (req, res, next) => {
 })
 
 router.get('/content', (req, res, next) => {
-  const result = getContent(req.query.id)
+  const { bookId, articleId } = req.query
+  const result = getContent(bookId, articleId)
   return result.then(data => {
     res.json(
       new SuccessModel(data)
