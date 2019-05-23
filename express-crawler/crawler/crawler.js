@@ -65,8 +65,8 @@ module.exports = function() {
           
           read.articleDetail(item.url).then((content) => {
             save.articleDetail(item, content).then(() => {
-              // let subject = `《${item.book_name}》最新更新章节：${item.title}`
-              // sendMail(subject, content)
+              let subject = `《${item.book_name}》最新更新章节：${item.title}`
+              sendMail(subject, content)
               next()
             })
           })
