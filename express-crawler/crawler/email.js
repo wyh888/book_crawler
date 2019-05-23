@@ -13,7 +13,7 @@ const sendMail = (subject, content) => {
   let mailOptions = {
     from: '',
     to: '',
-    subject: `道君最新更新章节：${subject}`,
+    subject,
     html: content
   }
 

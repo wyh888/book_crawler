@@ -1,21 +1,28 @@
 const async = require('async')
-const config = require('../conf/book')
 const read = require('../controller/read')
 const save = require('../controller/save')
 const sendMail = require('./email')
 const debug = require('debug')('crawler:run')
 
 module.exports = function() {
-  debug('爬虫任务开启')
+  debug('定时爬虫任务开启')
   
+  let bookList = []
   let articleList = {}
 
   async.series([
-
-    // 依次获取所有文章分类下的文章列表
+    // 获取数据库中的书籍列表
     function (done) {
-      async.eachSeries(config.books, function (c, next) {
-        read.articleList(c.url).then((list) => {
+      read.bookList().then((list) => {
+        bookList = list
+        done()
+      })
+    },
+
+    // 依次获取所有小说的文章列表
+    function (done) {
+      async.eachSeries(bookList, function (c, next) {
+        read.articleList(c).then((list) => {
           articleList[c.id] = list
           next()
         })
@@ -25,7 +32,7 @@ module.exports = function() {
     // 保存文章列表
     function (done) {
       async.eachSeries(Object.keys(articleList), function (id, next) {
-        save.articleList(articleList[id], next)
+        save.articleList(articleList[id], id, next)
       }, done)
     },
 
@@ -35,7 +42,7 @@ module.exports = function() {
       var articles = {}
       Object.keys(articleList).forEach(function (classId) {
         articleList[classId].forEach(function (item) {
-          articles[item.id] = item
+          articles[item.article_id] = item
         })
       })
 
@@ -50,15 +57,16 @@ module.exports = function() {
     // 依次读取文章的详细内容，并保存
     function (done) {
       async.eachSeries(articleList, function (item, next) {
-        save.isArticleExists(item.id).then((exists) => {
+        save.isArticleExists(item).then((exists) => {
           if (exists) {
-            debug('文章已存在：%s', item.url)
+            debug('文章已存在：%s', item.title)
             return next()
           }
           
           read.articleDetail(item.url).then((content) => {
-            save.articleDetail(item.id, content).then(() => {
-              sendMail(item.title, content)
+            save.articleDetail(item, content).then(() => {
+              // let subject = `《${item.book_name}》最新更新章节：${item.title}`
+              // sendMail(subject, content)
               next()
             })
           })
