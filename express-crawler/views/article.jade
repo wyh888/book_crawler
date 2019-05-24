@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= name
+  ul
+    each item, i in list
+      li
+        a(href='/detail/' + item.book_id + '/' + item.article_id)= item.title

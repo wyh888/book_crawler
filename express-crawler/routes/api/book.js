@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { getList } = require('../controller/book')
-const { SuccessModel } = require('../model/resModel')
+const { getList } = require('../../controller/book')
+const { SuccessModel } = require('../../model/resModel')
 
 router.get('/list', (req, res, next) => {
   const result = getList()

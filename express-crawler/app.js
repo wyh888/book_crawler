@@ -7,9 +7,13 @@ var scheduleCrawler = require('./crawler/index');
 
 scheduleCrawler(); // 定时执行爬虫任务
 
-var indexRouter = require('./routes/index');
-var articleRouter = require('./routes/article');
-var bookRouter = require('./routes/book')
+// 页面路由
+var indexRouter = require('./routes/page/index');
+var articleRouter = require('./routes/page/article');
+var detailRouter = require('./routes/page/detail');
+// api 路由
+var apiArticleRouter = require('./routes/api/article');
+var apiBookRouter = require('./routes/api/book')
 
 var app = express();
 
@@ -24,8 +28,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/api/article', articleRouter);
-app.use('/api/book', bookRouter);
+app.use('/article', articleRouter);
+app.use('/detail', detailRouter);
+app.use('/api/article', apiArticleRouter);
+app.use('/api/book', apiBookRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

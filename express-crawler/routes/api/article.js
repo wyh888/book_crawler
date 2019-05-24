@@ -3,8 +3,8 @@ const router = express.Router()
 const {
   getList,
   getContent
-} = require('../controller/article')
-const { SuccessModel } = require('../model/resModel')
+} = require('../../controller/article')
+const { SuccessModel } = require('../../model/resModel')
 
 router.get('/list', (req, res, next) => {
   const result = getList(req.query.id)

@@ -14,7 +14,16 @@ const getContent = (bookId, articleId) => {
   })
 }
 
+const getArticleTitle = (bookId, articleId) => {
+  const sql = `select * from article_list where book_id='${bookId}' and article_id='${articleId}';`
+
+  return exec(sql).then(rows => {
+    return rows[0].title
+  })
+}
+
 module.exports = {
   getList,
-  getContent
+  getContent,
+  getArticleTitle
 }

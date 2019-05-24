@@ -77,7 +77,7 @@ module.exports = function() {
   ], function (err) {
     if (err) console.error(err.stack)
 
-    console.log('完成')
-    process.exit(0)
+    debug('完成')
+    // process.exit(0)
   })
 }
