@@ -13,4 +13,4 @@ router.get('/:id/:articleId', function (req, res, next) {
   })
 })
 
-module.exports = router;
+module.exports = router

@@ -15,6 +15,3 @@ build
 
 # logs
 logs
-
-# email config
-email.js
