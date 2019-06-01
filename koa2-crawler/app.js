@@ -6,10 +6,15 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
+// router
 const index = require('./routes/page/index')
 const article = require('./routes/page/article')
 const apiBook = require('./routes/api/book')
 const apiArticle = require('./routes/api/article')
+
+// crawler
+const scheduleCrawler = require('./crawler/index')
+scheduleCrawler()
 
 // error handler
 onerror(app)
